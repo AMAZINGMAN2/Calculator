@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <style>
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-gradient-to-bl from-indigo-700 via-cyan-600 to-purple-700">
+        <div class="center text-gray-200 font-sans antialiased flex justify-center">
+            <h1 class="text-7xl py-12 select-none">MATH CALCULATOR</h1>
+        </div>
+
+        <div class="mt-12">
+            <h2 class="select-none center text-gray-200 font-sans antialiased flex justify-center text-4xl">Factorial Calculator</h2>
+        </div>
+
+        <div class="flex justify-center pt-4">
+            <div class="relative mb-3 hover:shadow-2xl hover:scale-110 ease-out duration-150" data-te-input-wrapper-init>
+                <input
+                    type="number"
+                    class="peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary"
+                    id="factorialInput"
+                    placeholder="Enter Number" />
+            </div>
+        </div>
+
+        <div class="center text-gray-200 font-sans antialiased flex justify-center">
+            <button type="button" onclick="calculateFactorial()" class="select-none shadow-lg bg-gradient-to-br from-indigo-700 to-purple-700 rounded-2xl py-3 px-4 my-8 hover:shadow-2xl hover:scale-125 ease-out duration-150 hover:rounded-3xl ">Calculate Factorial</button>
+        </div>
+
+        <div class="mt-12">
+            <h2 class="select-none center text-gray-200 font-sans antialiased flex justify-center text-4xl">Prime Number Calculator</h2>
+        </div>
+
+        <div class="flex justify-center pt-4">
+            <div class="relative mb-3 hover:shadow-2xl hover:scale-110 ease-out duration-150" data-te-input-wrapper-init>
+                <input
+                    type="number"
+                    class="peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary"
+                    id="primeNumberInput"
+                    placeholder="Enter nth prime number" />
+            </div>
+        </div>
+
+        <div class="center text-gray-200 font-sans antialiased flex justify-center">
+            <button type="button" onclick="calculatePrime()" class="select-none shadow-lg bg-gradient-to-br from-indigo-700 to-purple-700 rounded-2xl py-3 px-4 my-8 hover:shadow-2xl hover:scale-125 ease-out duration-150 hover:rounded-3xl ">Calculate Prime</button>
+        </div>
+
+        <div class="center text-gray-200 font-sans antialiased flex justify-center">
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script>
+        function calculateFactorial() {
+            const n = parseInt(document.getElementById('factorialInput').value);
+            const resultElement = document.getElementById('result');
+
+            if (n < 0) {
+                resultElement.innerHTML = 'Factorial is not defined for negative numbers.';
+                return;
+            }
+
+            let factorial = 1;
+            for (let i = 2; i <= n; i++) {
+                factorial *= i;
+            }
+
+            resultElement.innerHTML = `Factorial of ${n} is: ${factorial}`;
+        }
+
+        function isPrime(num) {
+            if (num <= 1) return false;
+            if (num <= 3) return true;
+            if (num % 2 === 0 || num % 3 === 0) return false;
+            let i = 5;
+            while (i * i <= num) {
+                if (num % i === 0 || num % (i + 2) === 0) return false;
+                i += 6;
+            }
+            return true;
+        }
+
+        function calculatePrime() {
+            const n = parseInt(document.getElementById('primeNumberInput').value);
+            const resultElement = document.getElementById('result');
+
+            if (n <= 0) {
+                resultElement.innerHTML = 'Please enter a positive number.';
+                return;
+            }
+
+            let count = 0;
+            let number = 2;
+            while (count < n) {
+                if (isPrime(number)) {
+                    count++;
+                }
+                number++;
+            }
+
+            resultElement.innerHTML = `The ${n}-th prime number is: ${number - 1}`;
+        }
+    </script>
+</body>
+
+</html>
